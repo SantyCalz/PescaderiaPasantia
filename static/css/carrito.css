@@ -1,0 +1,208 @@
+/* ======================================================
+   CARRITO - ESTILO DON ANTONIO
+   ====================================================== */
+
+.contenido-carrito {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: var(--blanco);
+    border-radius: 22px;
+    border: 1px solid var(--borde-suave);
+    box-shadow: var(--sombra-suave);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.titulo-carrito {
+    font-size: 2.3rem;
+    color: var(--negro);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.carrito-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    border: 1px solid var(--borde-suave);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.carrito-tabla th,
+.carrito-tabla td {
+    padding: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--borde-suave);
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    background: var(--blanco);
+}
+
+.carrito-tabla th {
+    font-weight: 600;
+    background: linear-gradient(120deg, var(--negro) 0%, var(--gris-oscuro) 100%);
+    color: var(--blanco);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.carrito-tabla tbody tr:hover {
+    background-color: var(--gris-claro);
+    transform: translateY(-2px);
+}
+
+.btn-carrito {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: var(--blanco);
+    background: var(--negro);
+    border: 1px solid rgba(15, 23, 42, 0.35);
+    text-decoration: none;
+    margin: 0 0.25rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.acciones-carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.acciones-carrito .btn-carrito {
+    display: inline-flex !important;
+    margin: 0;
+}
+
+.btn-carrito.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.btn-carrito:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.2);
+}
+
+.btn-carrito.restar,
+.btn-carrito.eliminar {
+    background: var(--accent);
+    border-color: rgba(180, 83, 9, 0.4);
+}
+
+.total-botones-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 2rem;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s 0.1s forwards;
+}
+
+.total-botones-container p {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--negro);
+    margin: 0;
+}
+
+.botones-carrito {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.botones-carrito a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    padding: 0.9rem 2.2rem;
+    background: var(--negro);
+    color: var(--blanco);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.botones-carrito a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+    opacity: 0.95;
+}
+
+.sin-stock,
+.stock-bajo {
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.sin-stock {
+    color: var(--gris-medio);
+    background: var(--gris-claro);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.stock-bajo {
+    color: var(--accent);
+    background: var(--accent-suave);
+    border: 1px solid rgba(180, 83, 9, 0.25);
+}
+
+@media (max-width: 768px) {
+    .contenido-carrito {
+        padding: 1.25rem;
+        margin: 1.5rem;
+    }
+
+    .carrito-tabla th,
+    .carrito-tabla td {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    .botones-carrito {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .botones-carrito a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .total-botones-container p {
+        font-size: 1.3rem;
+        align-self: flex-start;
+    }
+}

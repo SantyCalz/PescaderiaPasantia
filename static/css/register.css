@@ -1,0 +1,168 @@
+/* ============================ */
+/*     CONTENEDOR PRINCIPAL      */
+/* ============================ */
+.register-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: var(--blanco);
+    padding: 2.5rem 1.5rem;
+    overflow: hidden;
+}
+
+/* ============================ */
+/*             CARD              */
+/* ============================ */
+.register-card {
+    position: relative;
+    background: var(--blanco);
+    border-radius: 28px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 760px;
+    box-shadow: var(--sombra-suave);
+    animation: fadeIn 0.6s ease forwards;
+    border: 1px solid var(--borde-suave);
+    z-index: 1;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-card:hover {
+    box-shadow: var(--sombra-intensa);
+    border-color: rgba(15, 23, 42, 0.15);
+}
+
+/* ============================ */
+/*            TÍTULO             */
+/* ============================ */
+.register-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.75rem;
+    color: var(--negro);
+    text-align: center;
+    letter-spacing: -0.03em;
+}
+
+/* ============================ */
+/*           FORMULARIO           */
+/* ============================ */
+.register-form .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1.5rem;
+}
+
+/* Campos que ocupan las dos columnas */
+.register-form .form-group.full-width {
+    grid-column: 1 / span 2;
+}
+
+/* Grupo de inputs */
+.register-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Inputs */
+.register-form input {
+    padding: 0.95rem 1.1rem;
+    border-radius: 16px;
+    border: 1px solid var(--borde-suave);
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    background: var(--blanco);
+    color: var(--gris-oscuro);
+}
+
+.register-form input:focus {
+    border-color: var(--negro);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+    outline: none;
+}
+
+/* Mensajes de error */
+.form-error {
+    color: var(--accent);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* ============================ */
+/*      BOTÓN REGISTRARSE        */
+/* ============================ */
+.btn-register {
+    grid-column: 1 / span 2;
+    margin: 1.75rem auto 0 auto;
+    width: fit-content;
+    border-radius: 999px;
+    padding: 0.95rem 3.5rem;
+    font-weight: 600;
+    background: var(--negro);
+    color: var(--blanco);
+    border: none;
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-intensa);
+    opacity: 0.95;
+}
+
+/* ============================ */
+/*             FOOTER            */
+/* ============================ */
+.register-footer {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--gris-medio);
+    text-align: center;
+}
+
+.register-footer a {
+    color: var(--negro);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================ */
+/*           ANIMACIÓN           */
+/* ============================ */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================ */
+/* AJUSTES ESPECÍFICOS DEL GRID  */
+/* ============================ */
+.register-form .form-grid .form-group:nth-child(1) { grid-column: 1; } /* first_name */
+.register-form .form-grid .form-group:nth-child(2) { grid-column: 2; } /* last_name */
+.register-form .form-grid .form-group:nth-child(3) { grid-column: 1 / span 2; } /* email */
+.register-form .form-grid .form-group:nth-child(4) { grid-column: 1; } /* username */
+.register-form .form-grid .form-group:nth-child(5) { grid-column: 2; } /* telefono */
+.register-form .form-grid .form-group:nth-child(6) { grid-column: 1; } /* password1 */
+.register-form .form-grid .form-group:nth-child(7) { grid-column: 2; } /* password2 */
+
+/* ============================ */
+/*           RESPONSIVE          */
+/* ============================ */
+@media (max-width: 768px) {
+    .register-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-register {
+        width: 100%;
+        text-align: center;
+    }
+}

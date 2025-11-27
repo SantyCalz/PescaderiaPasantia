@@ -1,0 +1,390 @@
+/* ======================================================
+   DETALLE DE PRODUCTO - ESTILO PREMIUM PESCADERÍA
+   ====================================================== */
+/* ============================ */
+/*     BLOQUE PRINCIPAL          */
+/* ============================ */
+.detalle-producto {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background: var(--blanco);
+    border-radius: 20px;
+    box-shadow: 0 20px 55px rgba(15, 23, 42, 0.08);
+    border: 1px solid var(--borde-suave);
+}
+
+/* ============================ */
+/*       FILA PRINCIPAL          */
+/* ============================ */
+.producto-row {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+/* ============================ */
+/*        GALERÍA DE IMÁGENES    */
+/* ============================ */
+.galeria {
+    flex: 1;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagen-principal {
+    width: 100%;
+    max-width: 600px;
+    height: 600px;
+    border-radius: 0;
+    object-fit: contain;
+    box-shadow: none;
+    margin-bottom: 2rem;
+    background: var(--blanco);
+    padding: 2rem;
+}
+
+.miniaturas {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.miniaturas img,
+.miniatura {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: var(--blanco);
+    padding: 0.5rem;
+}
+
+.miniaturas img.active,
+.miniatura.active {
+    border-color: var(--negro);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.miniaturas img:hover,
+.miniatura:hover {
+    border-color: var(--gris-oscuro);
+    transform: translateY(-2px);
+}
+
+/* ============================ */
+/*     INFORMACIÓN DEL PRODUCTO  */
+/* ============================ */
+.info-producto {
+    flex: 1;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+}
+
+.info-producto h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--negro);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.precio-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.precio-original {
+    text-decoration: line-through;
+    font-size: 1.2rem;
+    color: var(--gris-suave);
+}
+
+.precio-descuento {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--negro);
+    letter-spacing: -1px;
+}
+
+.badge-descuento {
+    background: var(--accent);
+    color: var(--blanco);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(180, 83, 9, 0.25);
+}
+
+/* ============================ */
+/*   DESCRIPCIÓN DEL PRODUCTO   */
+/* ============================ */
+.descripcion-producto {
+    background: var(--blanco);
+    padding: 1.75rem;
+    border-radius: 18px;
+    border: 1px solid var(--borde-suave);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.descripcion-producto h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--negro);
+    margin: 0 0 1rem 0;
+}
+
+.descripcion-producto p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--gris-medio);
+    margin: 0;
+}
+
+/* ============================ */
+/*   INFORMACIÓN DE STOCK       */
+/* ============================ */
+.stock-info {
+    margin: 0;
+}
+
+.stock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.sin-stock-badge {
+    background: rgba(15, 23, 42, 0.06);
+    color: var(--gris-medio);
+    border: 2px solid rgba(15, 23, 42, 0.15);
+}
+
+.stock-bajo-badge {
+    background: var(--accent-suave);
+    color: var(--accent);
+    border: 2px solid rgba(180, 83, 9, 0.25);
+}
+
+.stock-disponible-badge {
+    background: var(--gris-claro);
+    color: var(--gris-oscuro);
+    border: 2px solid rgba(15, 23, 42, 0.08);
+}
+
+/* Botón agregar al carrito premium */
+.btn-agregar {
+    background: var(--negro);
+    color: var(--blanco);
+    padding: 1.2rem 2.5rem;
+    border-radius: 999px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    margin-top: 1rem;
+    align-self: flex-start;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-agregar:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 25px 45px rgba(15, 23, 42, 0.2);
+}
+
+.btn-agregar.disabled {
+    background: var(--gris-claro);
+    cursor: not-allowed;
+    pointer-events: none;
+    color: var(--gris-medio);
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+/* ============================ */
+/*    PRODUCTOS SIMILARES        */
+/* ============================ */
+.similares-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background: var(--blanco);
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08);
+    border: 1px solid var(--borde-suave);
+}
+
+.similares-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--negro);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.similares-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.similares-slider {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    flex: 1;
+    padding: 1rem 0;
+}
+
+.similares-slider::-webkit-scrollbar {
+    height: 8px;
+}
+
+.similares-slider::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+.similares-slider .similar-card {
+    flex: 0 0 calc(25% - 1.125rem);
+    min-width: 300px;
+    min-height: 100%;
+}
+
+@media (max-width: 1200px) { 
+    .similares-slider .similar-card { 
+        flex: 0 0 calc(33.33% - 1rem); 
+    } 
+}
+
+@media (max-width: 992px) { 
+    .similares-slider .similar-card { 
+        flex: 0 0 calc(50% - 0.75rem); 
+    } 
+}
+
+/* ============================ */
+/*         FLECHAS SLIDER         */
+/* ============================ */
+.slider-arrow {
+    background: var(--negro);
+    color: var(--blanco);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.slider-arrow:hover { 
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+}
+
+.slider-arrow.prev { 
+    left: -20px; 
+}
+
+.slider-arrow.next { 
+    right: -20px; 
+}
+
+/* ============================ */
+/*           RESPONSIVE           */
+/* ============================ */
+@media (max-width: 992px) {
+    .producto-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .galeria { order: 1; }
+    .info-producto { order: 2; width: 100%; }
+
+    .imagen-principal { 
+        max-width: 100%; 
+        height: 350px; 
+    }
+    
+    .miniaturas img,
+    .miniatura { 
+        width: 65px; 
+        height: 65px; 
+    }
+    
+    .btn-agregar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1200px) { 
+    .similar-card { 
+        flex: 0 0 calc(33.33% - 1rem); 
+    } 
+}
+
+@media (max-width: 992px) { 
+    .similar-card { 
+        flex: 0 0 calc(50% - 0.75rem); 
+    } 
+}
+
+@media (max-width: 600px) { 
+    .similares-slider .similar-card { 
+        flex: 0 0 100%; 
+    }
+    
+    .info-producto h1,
+    h1 {
+        font-size: 1.7rem;
+    }
+    
+    .precio-descuento {
+        font-size: 1.9rem;
+    }
+    
+    .slider-arrow {
+        display: none;
+    }
+}

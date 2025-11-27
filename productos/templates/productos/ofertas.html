@@ -1,0 +1,85 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ================= CONTENEDOR PRINCIPAL - OFERTAS ================= -->
+<div class="lista-container">
+    <h1>🐟 Ofertas de Pescadería 🐟</h1>
+    <p style="text-align: center; color: var(--azul-oceano, #1A5F7A); font-size: 1.1rem; margin-bottom: 2rem;">
+        ¡Los mejores productos del mar a precios increíbles!
+    </p>
+
+    <!-- ================= FORMULARIO DE FILTROS ================= -->
+    <form method="get" class="filtros">
+        <!-- Búsqueda por texto -->
+        <input type="text" name="q" placeholder="Buscar producto en oferta..." value="{{ request.GET.q|default:'' }}">
+        <!-- Filtrado por categoría -->
+        <select name="categoria">
+            <option value="">Todas las categorías</option>
+            {% for cat in categorias %}
+                <option value="{{ cat.id }}" {% if request.GET.categoria == cat.id|stringformat:"s" %}selected{% endif %}>
+                    {{ cat.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </form>
+
+    <!-- ================= GRID DE PRODUCTOS EN OFERTA ================= -->
+    <div class="productos-grid">
+        {% for producto in productos %}
+            <div class="producto-card">
+                <div class="producto-card__image-wrapper">
+                    {% if producto.descuento > 0 %}
+                        <span class="producto-card__badge">-{{ producto.descuento|floatformat:0 }}% OFF</span>
+                    {% endif %}
+                    <a href="{% url 'detalle_producto' producto.id %}" class="producto-card__image-link">
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-card__image">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300" alt="Sin imagen" class="producto-card__image">
+                        {% endif %}
+                    </a>
+                </div>
+
+                <div class="producto-card__info">
+                    {% if producto.categoria %}
+                        <span class="producto-card__category">{{ producto.categoria.nombre }}</span>
+                    {% endif %}
+                    <h3 class="producto-card__title">
+                        <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a>
+                    </h3>
+
+                    <div class="producto-card__stock-row">
+                        {% if producto.stock == 0 %}
+                            <span class="producto-card__stock producto-card__stock--out">Sin stock</span>
+                        {% elif producto.stock > 0 and producto.stock < 10 %}
+                            <span class="producto-card__stock producto-card__stock--low">Quedan {{ producto.stock }} en stock</span>
+                        {% else %}
+                            <span class="producto-card__stock producto-card__stock--in">Disponible</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="producto-card__price-row">
+                        <div class="producto-card__prices">
+                            {% if producto.descuento > 0 %}
+                                <span class="producto-card__price-old">${{ producto.precio }}</span>
+                                <span class="producto-card__price-current">${{ producto.precio_con_descuento|floatformat:2 }}</span>
+                            {% else %}
+                                <span class="producto-card__price-current">${{ producto.precio }}</span>
+                            {% endif %}
+                        </div>
+                        <a class="producto-card__cta" href="{% url 'detalle_producto' producto.id %}">Ver detalle</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p style="text-align: center; color: var(--azul-oceano, #1A5F7A); font-size: 1.2rem; grid-column: 1 / -1;">
+                No hay productos en oferta en este momento. ¡Vuelve pronto!
+            </p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

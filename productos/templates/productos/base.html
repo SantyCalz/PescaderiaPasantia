@@ -1,0 +1,225 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Pescadería Fresca - E-commerce{% endblock %}</title>
+
+    <!-- ======================================================
+         CSS principal y librerías - ESTILO PESCADERÍA
+         ====================================================== -->
+    <link rel="stylesheet" href="{% static 'css/pescaderia.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+          integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Bloque adicional de head para cada template -->
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <!-- ======================================================
+         NAVBAR - ESTILO PESCADERÍA
+         - Enlaces a productos, ofertas, destacados, carrito y cuenta
+         - Cambia según si el usuario está autenticado
+         - Íconos con tooltip (title) para mejor accesibilidad
+    ====================================================== -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="{% url 'lista_productos' %}" class="nav-link">Productos</a>
+            <a href="{% url 'ofertas' %}" class="nav-link">Ofertas</a>
+            <a href="{% url 'nosotros' %}" class="nav-link">Nosotros</a>
+        </div>
+
+        <div class="navbar-center">
+            <a href="{% url 'lista_productos' %}">
+                <img src="{% static 'img/logo.png' %}" alt="Logo Pescadería" class="navbar-logo">
+            </a>
+        </div>
+
+        <div class="navbar-right">
+            {% if user.is_authenticated %}
+                <!-- Usuario logueado: acceso a carrito, cuenta y logout -->
+                <a href="{% url 'ver_carrito' %}" class="icon-link" title="Ver carrito">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="{% url 'mi_cuenta' %}" class="icon-link" title="Mi cuenta">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="{% url 'logout_usuario' %}" class="icon-link" title="Cerrar sesión">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            {% else %}
+                <!-- Usuario no logueado: login y registro -->
+                <a href="{% url 'login_usuario' %}" class="icon-link" title="Iniciar sesión">
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+                <a href="{% url 'registro' %}" class="icon-link" title="Registrarse">
+                    <i class="fas fa-user-plus"></i>
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- ======================================================
+         BLOQUE DE MENSAJES
+         - Muestra feedback al usuario: éxito, error, advertencia o info
+         - Se cierra automáticamente con el botón "x"
+         - Feedback agregado: cualquier acción en backend que genere mensajes
+           (ej: producto agregado al carrito, login incorrecto, pedido exitoso)
+    ====================================================== -->
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert 
+                {% if message.tags == 'error' %}alert-danger
+                {% elif message.tags == 'success' %}alert-success
+                {% elif message.tags == 'warning' %}alert-warning
+                {% else %}alert-info{% endif %} 
+                alert-dismissible fade show" role="alert">
+                
+                {{ message }} <!-- Mensaje dinámico enviado desde views.py -->
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ======================================================
+         CONTENIDO PRINCIPAL
+         - Cada template insertará aquí su contenido
+         - Feedback: los templates hijos pueden mostrar alertas
+           dentro de este bloque, por ejemplo al agregar un producto
+           al carrito o al filtrar productos
+    ====================================================== -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ======================================================
+         FOOTER PREMIUM PROFESIONAL - ESTILO DON ANTONIO
+         - Diseño moderno, limpio y completamente funcional
+         - 100% responsive con información organizada
+         - Redes sociales, contacto y enlaces útiles
+    ====================================================== -->
+    <footer class="footer-premium">
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+            </svg>
+        </div>
+        
+        <div class="footer-main">
+            <div class="footer-grid">
+                <!-- Columna 1: Brand y descripción -->
+                <div class="footer-col footer-brand-col">
+                    <div class="footer-logo">
+                        <img src="{% static 'img/logo.png' %}" alt="Logo Pescadería">
+                    </div>
+                    <h3 class="footer-brand-name">Pescadería Premium</h3>
+                    <p class="footer-tagline">La frescura del mar directo a tu mesa</p>
+                    <p class="footer-description">
+                        Más de 20 años ofreciendo los productos más frescos y de la mejor calidad. 
+                        Selección diaria de pescados y mariscos premium.
+                    </p>
+                </div>
+                
+                <!-- Columna 2: Enlaces rápidos -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'lista_productos' %}"><i class="fas fa-fish"></i> Productos</a></li>
+                        <li><a href="{% url 'ofertas' %}"><i class="fas fa-tag"></i> Ofertas</a></li>
+                        <li><a href="{% url 'nosotros' %}"><i class="fas fa-user-friends"></i> Nosotros</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'mi_cuenta' %}"><i class="fas fa-user"></i> Mi Cuenta</a></li>
+                        <li><a href="{% url 'ver_carrito' %}"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login_usuario' %}"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+                        <li><a href="{% url 'registro' %}"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                
+                <!-- Columna 3: Información de contacto -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Contacto</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Dirección</strong>
+                                <span>Av. José Vicente Zapata 267<br>M5600BSR San Rafael, Mendoza</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Teléfono</strong>
+                                <span>0260 455 2618</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <span>ventas@pescaderia.com.ar</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Horarios</strong>
+                                <span>Lun a Vie: 8:00-13:30 / 17:30-20:30<br>Sáb: 9:00-13:30 · Dom: Cerrado</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 4: Redes sociales y newsletter -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Síguenos</h4>
+                    <p class="footer-social-text">Mantente al día con nuestras ofertas y novedades</p>
+                    <div class="footer-social-icons">
+                        <a href="#" class="footer-social-icon facebook" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="footer-social-icon whatsapp" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="footer-badges">
+                        <div class="footer-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Compra<br>Segura</span>
+                        </div>
+                        <div class="footer-badge">
+                            <i class="fas fa-medal"></i>
+                            <span>Calidad<br>Premium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Barra inferior con copyright -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 Pescadería Premium. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================================
+         JS de Bootstrap
+         - Permite alertas interactivas y componentes dinámicos
+         - Scripts adicionales se pueden agregar desde templates hijos
+    ====================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+/* ============================ */
+/*     BLOQUE PRINCIPAL         */
+/* ============================ */
+.editar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f5f7fa;
+    padding: 2rem 1rem;
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+.cards-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+    flex-wrap: wrap;
+}
+
+/* ============================ */
+/*       ANIMACIÓN GENERAL       */
+/* ============================ */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================ */
+/*       TARJETA / CARD          */
+/* ============================ */
+.editar-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    flex: 1 1 350px;
+    max-width: 400px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #e8e8e8;
+}
+
+.card-pequena {
+    padding: 1.5rem;
+}
+
+/* ============================ */
+/*           TÍTULO              */
+/* ============================ */
+.editar-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #000000;
+    text-align: center;
+}
+
+/* ============================ */
+/*           FORMULARIO          */
+/* ============================ */
+.editar-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.editar-form .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+}
+
+.editar-form label {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.editar-form input {
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #f0f0f0;
+    color: #666666;
+}
+
+.editar-form input[readonly] {
+    cursor: default;
+}
+
+/* ============================ */
+/*          BOTONES              */
+/* ============================ */
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.btn-cancel {
+    display: block;
+    background: #000000;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    border: none;
+    text-align: center;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* ============================ */
+/*           EFECTOS             */
+/* ============================ */
+.btn-cancel:hover {
+    background: #2d2d2d;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ============================ */
+/*          RESPONSIVE           */
+/* ============================ */
+@media (max-width: 1000px) {
+    .cards-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .editar-card {
+        max-width: 90%;
+        min-width: 300px;
+    }
+}

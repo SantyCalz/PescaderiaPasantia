@@ -1,0 +1,93 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ================= CONTENEDOR PRINCIPAL - PROMOCIONES ================= -->
+<div class="lista-container">
+    <h1>🎉 Promociones Especiales 🎉</h1>
+    <p style="text-align: center; color: var(--azul-oceano, #1A5F7A); font-size: 1.1rem; margin-bottom: 2rem;">
+        ¡Descuentos especiales en productos seleccionados de nuestra pescadería!
+    </p>
+
+    <!-- ================= FORMULARIO DE FILTROS ================= -->
+    <form method="get" class="filtros">
+        <!-- Búsqueda por texto -->
+        <input type="text" name="q" placeholder="Buscar en promociones..." value="{{ request.GET.q|default:'' }}">
+        <!-- Filtrado por categoría -->
+        <select name="categoria">
+            <option value="">Todas las categorías</option>
+            {% for cat in categorias %}
+                <option value="{{ cat.id }}" {% if request.GET.categoria == cat.id|stringformat:"s" %}selected{% endif %}>
+                    {{ cat.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </form>
+
+    <!-- ================= GRID DE PRODUCTOS EN PROMOCIÓN ================= -->
+    <div class="productos-grid">
+        {% for producto in productos %}
+            <div class="producto-card">
+
+                <!-- Badge de descuento -->
+                {% if producto.descuento > 0 %}
+                    <div class="badge-ahorro">-{{ producto.descuento }}% OFF</div>
+                {% endif %}
+
+                <!-- Imagen y enlace al detalle del producto -->
+                <a href="{% url 'detalle_producto' producto.id %}">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/150" alt="Sin imagen">
+                    {% endif %}
+                </a>
+
+                <!-- Nombre del producto -->
+                <h3>
+                    <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a>
+                </h3>
+
+                <!-- Stock y disponibilidad -->
+                {% if producto.stock == 0 %}
+                    <span class="sin-stock">
+                        Sin stock
+                    </span>
+                {% elif producto.stock > 0 and producto.stock < 10 %}
+                    <span class="stock-bajo">
+                        Quedan {{ producto.stock }} en stock
+                    </span>
+                {% endif %}
+
+                <!-- Precios y botón de carrito -->
+                <div class="precio-carrito">
+                    <div class="precios">
+                        {% if producto.descuento > 0 %}
+                            <span class="precio-original">${{ producto.precio }}</span>
+                            <span class="precio-descuento">${{ producto.precio_con_descuento|floatformat:2 }}</span>
+                        {% else %}
+                            <span class="precio-descuento">${{ producto.precio }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Botón carrito -->
+                    {% if producto.stock == 0 %}
+                        <a class="btn-carrito disabled"><i class="fa-solid fa-cart-shopping"></i></a>
+                    {% else %}
+                        <a class="btn-carrito" href="{% url 'agregar_al_carrito' producto.id %}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <p style="text-align: center; color: var(--azul-oceano, #1A5F7A); font-size: 1.2rem; grid-column: 1 / -1;">
+                No hay promociones activas en este momento. ¡Vuelve pronto!
+            </p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

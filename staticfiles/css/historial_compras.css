@@ -1,0 +1,120 @@
+/* ============================ */
+/*     CONTENEDOR GENERAL        */
+/* ============================ */
+.historial-compras-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+    background: #f5f7fa;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+}
+
+/* ============================ */
+/*      ANIMACIÓN GENERAL        */
+/* ============================ */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================ */
+/*       TÍTULO PRINCIPAL        */
+/* ============================ */
+.historial-compras-container h2 {
+    margin-bottom: 1.5rem;
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* ============================ */
+/*      TABLA DE COMPRAS         */
+/* ============================ */
+.historial-compras-table {
+    width: 100%;
+    max-width: 900px;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+    border: 1px solid #e8e8e8;
+}
+
+.historial-compras-table th,
+.historial-compras-table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.historial-compras-table th {
+    background-color: #000000;
+    color: #fff;
+    font-weight: 600;
+}
+
+.historial-compras-table tbody tr:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.02);
+}
+
+/* ============================ */
+/*     LISTA DE PRODUCTOS EN FILA */
+/* ============================ */
+.historial-compras-table ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.historial-compras-table li {
+    margin: 0.2rem 0;
+}
+
+/* ============================ */
+/*       BOTÓN PRINCIPAL          */
+/* ============================ */
+.historial-compras-container .btn {
+    align-self: center;
+    background-color: #000000;
+    color: #fff;
+    padding: 0.85rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.historial-compras-container .btn:hover {
+    background-color: #2d2d2d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+    background-color: #10638a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* ============================ */
+/*          RESPONSIVE           */
+/* ============================ */
+@media (max-width: 768px) {
+    .historial-compras-table th,
+    .historial-compras-table td {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+}

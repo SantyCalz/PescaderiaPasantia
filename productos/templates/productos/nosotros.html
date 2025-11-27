@@ -1,0 +1,80 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="nosotros-page">
+    <div class="nosotros-hero">
+        <p class="nosotros-eyebrow">Desde 2001 en San Rafael</p>
+        <h1>Nosotros</h1>
+        <p class="nosotros-hero__text">
+            Somos una familia dedicada a la pesca artesanal y a la curaduría de productos frescos.
+            Creemos en el oficio, en la transparencia y en la relación cercana con cada cliente
+            que nos elige día a día.
+        </p>
+    </div>
+
+    <div class="nosotros-zigzag">
+        <article class="nosotros-block">
+            <div class="nosotros-block__media">
+                <img src="https://images.unsplash.com/photo-1758686253677-d3af6c15186e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Matrimonio fundador de la pescadería" loading="lazy">
+            </div>
+            <div class="nosotros-block__text">
+                <span class="nosotros-eyebrow">Quiénes somos</span>
+                <h2>Presentación de la familia</h2>
+                <p>
+                    Don Antonio y su familia lideran este proyecto desde hace más de veinte años. Cada jornada comienza
+                    antes del amanecer para supervisar la selección, garantizar la trazabilidad y definir qué productos
+                    llegan al mostrador. Somos un equipo cercano, con vocación de servicio y compromiso con la comunidad.
+                </p>
+                <p>
+                    Creemos en los vínculos honestos, en la palabra dada y en la dedicación artesanal. Esa es la esencia
+                    que preservamos en cada pedido, ya sea para un chef exigente o para una familia que nos visita cada semana.
+                </p>
+            </div>
+        </article>
+
+        <article class="nosotros-block nosotros-block--reverse">
+            <div class="nosotros-block__media">
+                <img src="{% static 'img/pescaderia.png' %}" alt="Mostrador de la pescadería" loading="lazy">
+            </div>
+            <div class="nosotros-block__text">
+                <span class="nosotros-eyebrow">Nuestra pescadería</span>
+                <h2>Selección diaria y calidad premium</h2>
+                <p>
+                    Trabajamos con proveedores certificados y artesanos de la costa que comparten nuestros valores. Cada
+                    pieza es fileteada y preparada según protocolos estrictos de higiene, preservando sabores y texturas
+                    naturales. Innovamos en empaques, logística y asesoramiento personalizado para que cada compra sea impecable.
+                </p>
+                <p>
+                    Nuestro local ofrece cortes a medida, curaduría para eventos y recomendaciones según temporada. Todo
+                    está pensado para que vivas una experiencia premium, moderna y cálida al mismo tiempo.
+                </p>
+            </div>
+        </article>
+
+        <article class="nosotros-block">
+            <div class="nosotros-block__media">
+                <iframe
+                    title="Mapa ubicación Pescadería Premium"
+                    src="https://maps.google.com/maps?q=Av.%20Jos%C3%A9%20Vicente%20Zapata%20267%2C%20M5600BSR%20San%20Rafael%2C%20Mendoza&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="nosotros-block__text">
+                <span class="nosotros-eyebrow">Dónde encontrarnos</span>
+                <h2>Te esperamos en San Rafael</h2>
+                <p>
+                    Av. José Vicente Zapata 267, M5600BSR San Rafael, Mendoza. El mapa te muestra la ubicación exacta
+                    con estacionamiento cercano y accesos rápidos.
+                </p>
+                <p>
+                    Horarios: lunes a viernes de 8:00 a 13:30 y de 17:30 a 20:30. Sábados abrimos de 9:00 a 13:30 y los
+                    domingos permanecemos cerrados. Podés coordinar entregas o asesorías llamando al 0260 455 2618.
+                </p>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

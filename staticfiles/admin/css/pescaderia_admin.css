@@ -1,0 +1,117 @@
+/* ======================================================
+   PERSONALIZACIÓN DEL ADMIN DE DJANGO - PESCADERÍA
+   Aplica colores y estilos de pescadería al panel admin
+   ====================================================== */
+
+/* Variables de colores pescadería */
+:root {
+    --admin-azul-marino: #0B3D5D;
+    --admin-azul-oceano: #1A5F7A;
+    --admin-turquesa: #159895;
+    --admin-turquesa-claro: #57C5B6;
+    --admin-celeste: #A8E6CF;
+}
+
+/* Encabezado principal del admin */
+#header {
+    background: linear-gradient(135deg, var(--admin-azul-marino) 0%, var(--admin-azul-oceano) 100%) !important;
+    color: #FFFFFF !important;
+}
+
+#branding h1,
+#branding h1 a:link,
+#branding h1 a:visited {
+    color: #FFFFFF !important;
+}
+
+/* Enlaces en el header */
+#user-tools a {
+    color: var(--admin-celeste) !important;
+}
+
+#user-tools a:hover {
+    color: #FFFFFF !important;
+}
+
+/* Botones de acción */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input {
+    background: linear-gradient(135deg, var(--admin-turquesa) 0%, var(--admin-turquesa-claro) 100%) !important;
+    border: none !important;
+    color: #FFFFFF !important;
+    padding: 10px 15px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(21, 152, 149, 0.4) !important;
+}
+
+/* Enlaces de navegación */
+.module h2,
+.module caption,
+.inline-group h2 {
+    background: linear-gradient(135deg, var(--admin-azul-oceano) 0%, var(--admin-turquesa) 100%) !important;
+    color: #FFFFFF !important;
+}
+
+/* Tablas */
+th {
+    background: var(--admin-azul-oceano) !important;
+    color: #FFFFFF !important;
+}
+
+tr.alt {
+    background: #F0F8FF !important;
+}
+
+/* Enlaces */
+a:link,
+a:visited {
+    color: var(--admin-turquesa) !important;
+}
+
+a:hover {
+    color: var(--admin-azul-oceano) !important;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: var(--admin-celeste) !important;
+    color: var(--admin-azul-marino) !important;
+}
+
+.breadcrumbs a {
+    color: var(--admin-azul-marino) !important;
+}
+
+.breadcrumbs a:hover {
+    color: var(--admin-azul-oceano) !important;
+}
+
+/* Mensajes de éxito */
+.success,
+.messagelist .success {
+    background: var(--admin-celeste) !important;
+    border-color: var(--admin-turquesa) !important;
+}
+
+/* Selector de fechas y calendarios */
+.calendarbox,
+.calendar {
+    background: #FFFFFF !important;
+    border: 2px solid var(--admin-turquesa) !important;
+}
+
+.calendar caption {
+    background: var(--admin-turquesa) !important;
+    color: #FFFFFF !important;
+}

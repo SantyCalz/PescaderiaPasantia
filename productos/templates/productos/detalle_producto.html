@@ -1,0 +1,169 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+
+{% block head %}
+<!-- CSS específico para detalle de producto -->
+<link rel="stylesheet" href="{% static 'css/detalle_producto.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= DETALLE DEL PRODUCTO ================= -->
+<div class="detalle-producto container">
+    <div class="producto-row">
+
+        <!-- Galería de imágenes -->
+        <div class="galeria">
+            <img id="imagen-principal" class="imagen-principal" 
+                 src="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}" 
+                 alt="{{ producto.nombre }}">
+
+            <div class="miniaturas">
+                {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" alt="Principal" class="miniatura active" onclick="cambiarImagen(this)">
+                {% endif %}
+                {% for img in producto.imagenes.all %}
+                <img src="{{ img.imagen.url }}" alt="Extra" class="miniatura" onclick="cambiarImagen(this)">
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Información principal -->
+        <div class="info-producto">
+            <h1>{{ producto.nombre }}</h1>
+
+            <!-- Precio y descuento -->
+            <div class="precio-section">
+                {% if producto.descuento > 0 %}
+                <span class="precio-original">${{ producto.precio }}</span>
+                <span class="precio-descuento">${{ producto.precio_con_descuento|floatformat:2 }}</span>
+                <span class="badge-descuento">-{{ producto.descuento }}%</span>
+                {% else %}
+                <span class="precio-descuento">${{ producto.precio }}</span>
+                {% endif %}
+            </div>
+
+            <!-- Descripción del producto (reemplaza sección de beneficios) -->
+            <div class="descripcion-producto">
+                <h3>Descripción</h3>
+                <p>{{ producto.descripcion }}</p>
+            </div>
+
+            <!-- Stock disponible -->
+            <div class="stock-info">
+                {% if producto.stock == 0 %}
+                <span class="stock-badge sin-stock-badge">
+                    <i class="fas fa-times-circle"></i> Sin Stock
+                </span>
+                {% elif producto.stock < 10 %}
+                <span class="stock-badge stock-bajo-badge">
+                    <i class="fas fa-exclamation-triangle"></i> Quedan solo {{ producto.stock }} unidades
+                </span>
+                {% else %}
+                <span class="stock-badge stock-disponible-badge">
+                    <i class="fas fa-check-circle"></i> Stock disponible
+                </span>
+                {% endif %}
+            </div>
+
+            <!-- Botón agregar al carrito -->
+            <a class="btn-agregar {% if producto.stock == 0 %}disabled{% endif %}" 
+               href="{% if producto.stock > 0 %}{% url 'agregar_al_carrito' producto.id %}{% else %}#{% endif %}">
+                <i class="fas fa-shopping-cart"></i> Agregar al carrito
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ================= PRODUCTOS SIMILARES ================= -->
+<div class="similares-container">
+    <h2 class="similares-title">Productos Similares</h2>
+    
+    <div class="similares-slider-wrapper">
+        <button class="slider-arrow prev" onclick="slideSimilares(-1)">&#8249;</button>
+        <div class="similares-slider" id="similares-slider">
+            {% for prod in productos_similares %}
+            <div class="producto-card similar-card">
+                <div class="producto-card__image-wrapper">
+                    {% if prod.descuento > 0 %}
+                        <span class="producto-card__badge">-{{ prod.descuento|floatformat:0 }}% OFF</span>
+                    {% endif %}
+                    <a href="{% url 'detalle_producto' prod.id %}" class="producto-card__image-link">
+                        {% if prod.imagen %}
+                            <img src="{{ prod.imagen.url }}" alt="{{ prod.nombre }}" class="producto-card__image">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300" alt="Sin imagen" class="producto-card__image">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="producto-card__info">
+                    {% if prod.categoria %}
+                        <span class="producto-card__category">{{ prod.categoria.nombre }}</span>
+                    {% endif %}
+                    <h3 class="producto-card__title">
+                        <a href="{% url 'detalle_producto' prod.id %}">{{ prod.nombre }}</a>
+                    </h3>
+
+                    <div class="producto-card__stock-row">
+                        {% if prod.stock == 0 %}
+                            <span class="producto-card__stock producto-card__stock--out">Sin stock</span>
+                        {% elif prod.stock > 0 and prod.stock < 10 %}
+                            <span class="producto-card__stock producto-card__stock--low">Quedan {{ prod.stock }} en stock</span>
+                        {% else %}
+                            <span class="producto-card__stock producto-card__stock--in">Disponible</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="producto-card__price-row">
+                        <div class="producto-card__prices">
+                            {% if prod.descuento > 0 %}
+                                <span class="producto-card__price-old">${{ prod.precio }}</span>
+                                <span class="producto-card__price-current">${{ prod.precio_con_descuento|floatformat:2 }}</span>
+                            {% else %}
+                                <span class="producto-card__price-current">${{ prod.precio }}</span>
+                            {% endif %}
+                        </div>
+                        <a class="producto-card__cta" href="{% url 'detalle_producto' prod.id %}">Ver detalle</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="slider-arrow next" onclick="slideSimilares(1)">&#8250;</button>
+    </div>
+</div>
+
+<!-- ================= SCRIPT GALERÍA Y SLIDER ================= -->
+<script>
+function cambiarImagen(elemento) {
+    const imagenPrincipal = document.getElementById("imagen-principal");
+    imagenPrincipal.src = elemento.src;
+    document.querySelectorAll(".miniaturas img").forEach(img => img.classList.remove("active"));
+    elemento.classList.add("active");
+}
+
+let slider = document.getElementById('similares-slider');
+let slideIndex = 0;
+
+function slideSimilares(direction) {
+    const cardWidth = slider.querySelector('.similar-card').offsetWidth + 24; // incluye gap
+    const totalCards = slider.children.length;
+    const visibleCards = 4; // cantidad visible
+
+    slideIndex += direction;
+
+    if (slideIndex < 0) {
+        slideIndex = totalCards - visibleCards;
+    }
+    if (slideIndex > totalCards - visibleCards) {
+        slideIndex = 0;
+    }
+
+    slider.scrollTo({
+        left: cardWidth * slideIndex,
+        behavior: 'smooth'
+    });
+}
+</script>
+
+{% endblock %}
