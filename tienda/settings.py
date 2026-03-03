@@ -110,6 +110,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
 
+# Agregar media a las rutas que WhiteNoise puede servir
+if not DEBUG:
+    STATICFILES_DIRS = [BASE_DIR / 'static', BASE_DIR / 'media']
+
+# Opciones extra de WhiteNoise para servir archivos en producción
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = True
+
 
 # === CONFIGURACIÓN DE LOGIN ===
 LOGIN_URL = '/login/'          # Redirige aquí si no está logueado
