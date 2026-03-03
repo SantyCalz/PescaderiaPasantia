@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-a*rrx*8n6q6l=v%y4ze45
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Lista de dominios permitidos para acceder al proyecto
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'proyectoecommerce.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'pescaderiapasantia.onrender.com', '.onrender.com']
 
 
 # === APLICACIONES INSTALADAS ===
