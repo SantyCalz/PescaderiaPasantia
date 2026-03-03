@@ -103,16 +103,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'       # Carpeta donde se copian para prod
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # Optimiza estáticos
 
 # === ARCHIVOS MULTIMEDIA (subidos por usuarios, ej: imágenes de productos) ===
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-# Opciones extra de WhiteNoise para servir archivos en producción
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_AUTOREFRESH = True
-
-# Agregar media a las rutas que WhiteNoise puede servir
-if not DEBUG:
-    STATICFILES_DIRS = [BASE_DIR / 'static', BASE_DIR / 'media']
+# En producción, los archivos media se sirven desde static
+if DEBUG:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+else:
+    MEDIA_URL = '/static/'
+    MEDIA_ROOT = BASE_DIR / 'staticfiles'
+    STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Opciones extra de WhiteNoise para servir archivos en producción
 WHITENOISE_USE_FINDERS = True
