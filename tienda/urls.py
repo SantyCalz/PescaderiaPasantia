@@ -17,4 +17,6 @@ urlpatterns = [
 ]
 
 # Permite mostrar archivos multimedia (imágenes, PDFs, etc.)
+# En producción, los archivos media se copian a staticfiles durante el build
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

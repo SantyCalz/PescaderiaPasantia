@@ -104,11 +104,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 # === ARCHIVOS MULTIMEDIA (subidos por usuarios, ej: imágenes de productos) ===
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'staticfiles' / 'media'  # En producción se copian a staticfiles
 
 # Opciones extra de WhiteNoise para servir archivos en producción
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
+WHITENOISE_ROOT = BASE_DIR / 'staticfiles'  # Permite a WhiteNoise servir archivos desde staticfiles
 
 
 # === CONFIGURACIÓN DE LOGIN ===
