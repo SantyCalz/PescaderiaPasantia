@@ -52,9 +52,20 @@ btn.addEventListener('click', async function() {
 
         const data = await response.json();
 
-        if (data.status === 'ok' && data.pdf_url) {
-            // Pedido generado: mostrar PDF y ocultar botón
-            linkPDF.href = data.pdf_url;
+        if (data.status === 'ok' && data.pdf_data) {
+            // Convertir base64 a blob y descargar
+            const byteCharacters = atob(data.pdf_data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            
+            // Crear enlace de descarga
+            linkPDF.href = url;
+            linkPDF.download = data.pdf_filename;
             linkPDF.style.display = 'inline-block';
             btn.style.display = 'none';
         } else {

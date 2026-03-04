@@ -296,11 +296,20 @@ def pago_aprobado(request):
             doc.build(elements)
             buffer.seek(0)
 
+            # Devolver el PDF directamente como respuesta
+            from django.http import HttpResponse
+            import base64
+            
+            pdf_data = buffer.getvalue()
+            pdf_base64 = base64.b64encode(pdf_data).decode('utf-8')
             pdf_filename = f"pedido_{pedido.numero_pedido_formateado()}.pdf"
-            with open(f"static/media/pedidos/{pdf_filename}", "wb") as f:
-                f.write(buffer.getbuffer())
-
-            return JsonResponse({'status': 'ok', 'message': 'Pedido generado correctamente.', 'pdf_url': f"/static/media/pedidos/{pdf_filename}"})
+            
+            return JsonResponse({
+                'status': 'ok', 
+                'message': 'Pedido generado correctamente.', 
+                'pdf_data': pdf_base64,
+                'pdf_filename': pdf_filename
+            })
 
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': 'Ocurrió un error al generar el pedido.'})
